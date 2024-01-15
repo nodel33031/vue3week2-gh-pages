@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <h1 class="h3 mb-3 font-weight-normal text-center">請先登入</h1>
+          <div class="col-8">
+            <form id="form" class="form-signin" @submit.prevent="login">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="username"
+                  v-model="user.username"
+                  placeholder="name@example.com"
+                  required
+                  autofocus
+                />
+                <label for="username">Email address</label>
+              </div>
+              <div class="form-floating">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  v-model="user.password"
+                  placeholder="Password"
+                  required
+                />
+                <label for="password">Password</label>
+              </div>
+              <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+                登入
+              </button>
+            </form>
+          </div>
+        </div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021~∞ - 六角學院</p>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js"
+      integrity="sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+      integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module">
+      import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+
+      createApp({
+        data() {
+          return {
+             user : {
+              username: '',
+              password: '',
+            }
+          };
+        },
+        methods: {
+          login() {
+            //{
+            //   "success": true,
+            //   "message": "登入成功",
+            //   "uid": "gKklwIqGrvV3wx9L0w38n6cM3yh1",
+            //   "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImxrMDJBdyJ9.eyJpc3MiOiJodHRwczovL3Nlc3Npb24uZmlyZWJhc2UuZ29vZ2xlLmNvbS92dWUtY291cnNlLWFwaSIsImF1ZCI6InZ1ZS1jb3Vyc2UtYXBpIiwiYXV0aF90aW1lIjoxNzA0OTY5OTg4LCJ1c2VyX2lkIjoiZ0trbHdJcUdydlYzd3g5TDB3MzhuNmNNM3loMSIsInN1YiI6ImdLa2x3SXFHcnZWM3d4OUwwdzM4bjZjTTN5aDEiLCJpYXQiOjE3MDQ5Njk5ODgsImV4cCI6MTcwNTQwMTk4OCwiZW1haWwiOiJwODgwMjI3cGF1bEB5YWhvby5jb20udHciLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicDg4MDIyN3BhdWxAeWFob28uY29tLnR3Il19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.WHzW855VXHfzpRsBPeOX13BEMtVsZp4IgQAHDHM3P8jS0FRmJ-ZI5lpeNy17VLhFBq4S0H_HBz4KfDBLceXopH0zmU7gPPVaIERE7_N5nMu_BdiBOApMKlgiPUuqjWvlwsU0mTSW-XBZ3WCsaexNWcQExdhQXOEPDFJSS8jb4iiqQsEIQcmEk90F8aA7jCFzhm3gQrsSpYN1N-yjZANmHqHZGyRP5wu7ZvU09CGkjnK0q5dImZEq42sguJgYCRMWtjALkfraE3TfrZ9gV8dhF68fL12o7N0kriXy27HcX0yxO7YPdRtMQZHb7WvXKU6nJScTxpPCQLcNdre9XEtfeQ",
+            //   "expired": 1705401988857
+            // }
+
+            axios
+              .post(`https://ec-course-api.hexschool.io/v2/admin/signin`, this.user)
+              .then(function (response) {
+                console.log(response);
+                const { token, expired } = response.data;
+                document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
+                console.log(token,expired);
+                window.location = 'week2Task02.html';
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          },
+        },
+        // mounted() {},
+      }).mount("#app");
+    </script>
+  </body>
+</html>
